@@ -16,7 +16,7 @@ function draw() {
     fill(180);
     text(hr, 10, 30);
     fill(100);
-    text(min, 10, 60);
+    text(min, 10 + min * 548/59, 60);
     fill(0);
     text(sec, 10 + sec * 548/59, 90);
 }
