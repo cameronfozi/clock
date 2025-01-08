@@ -1,9 +1,13 @@
+// currentMinute is the current minute, updated every 60 seconds
+var delayMinute = minute();
+
 // setup() is called once at page-load
 function setup() {
     createCanvas(600,600); // make an HTML canvas element width x height pixels
 }
 
 // draw() is called 60 times per second
+
 function draw() {
     let hr = hour();
     let min = minute();
@@ -19,4 +23,11 @@ function draw() {
     text(min, 10 + min * 548/59, 60);
     fill(0);
     text(sec, 10 + sec * 548/59, 90);
+
+    if (min != delayMinute) {
+
+        console.log(min);
+        delayMinute = min
+
+    }
 }
