@@ -9,6 +9,7 @@ function draw() {
     let min = minute();
     let sec = second();
 
+    colorMode(RGB, 255);
     background(235, 235, 180);
     textSize(32);
     fill(180);
