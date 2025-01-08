@@ -10,7 +10,8 @@ function draw() {
     let sec = second();
 
     colorMode(RGB, 255, 255, 255);
-    background(235, 235, 180);
+    let myColor = color(235, 235, 180);
+    background(myColor);
     textSize(32);
     fill(180);
     text(hr, 10, 30);
