@@ -26,7 +26,7 @@ function setBackground() {
     line(174, 0, 174, 148);
    
     strokeWeight(1);
-    fill(255, 255, 255);
+    fill(240, 240, 240);
     for (let sq1 = 0; sq1 < 4; sq1++) {
 
       wdth = 4 + 24 * sq1
@@ -100,31 +100,37 @@ function setMinute(secs) {
 }
 
 // setHour() sets the hour hand
-function setHour(mins) {
+function setHour(min, hour) {
 
-  hourCompletion= map(mins, 0, 1439, 0, 100 * 100)
-  fullHourSquares = Math.floor(hourCompletion / ((100 * 100)/4))
+  for (let sq1 = 0; sq1 < 6; sq1++) {
+
+    wdth = 4 + 24 * sq1
+      
+    for (let sq2 = 0; sq2 < 4; sq2++) {
+      
+      if (hour <= 0) {
+      
+        newLength = map(min, 0, 60, 0, 20 * 20) ** 0.5;
+        square(4 + sq2 * 24, wdth, newLength);
+        break
+        
+      } else {
+        
+        square(4 + sq2 * 24, wdth, 20);
+        hour = hour - 1;
+        
+      }
+
+    }
+      
+    if (hour <= 0) {
+      
+      break
+      
+    }
+
+  } 
   
-  // if (fullHourSquares == 0) {
-  //   square(0, 0, hourCompletion ** (0.5));
-  // }
-
-  // if (fullHourSquares == 1) {
-  //   square(0, 0, 50);
-  //   square(50, 0, (hourCompletion-((100 * 100)/4)) ** (0.5));
-  // }
-
-  // if (fullHourSquares == 2) {
-  //   rect(0, 0, 100, 50);
-  //   square(50, 50, (hourCompletion-((100 * 100)/2)) ** (0.5));
-  // }
-
-  // if (fullHourSquares == 3) {
-  //   rect(0, 0, 100, 50);
-  //   square(50, 50, 50);
-  //   square(0, 50, (hourCompletion-(3*(100 * 100)/4)) ** (0.5));
-  // } 
-
 }
 
 function checkPrint(min) {
@@ -149,7 +155,7 @@ function draw() {
     fill(0, 0, 0);
     setSecond(sec);
     setMinute(sec + min * 60);
-    setHour(min + hr * 60);
+    setHour(min, hr);
     checkPrint(min);
   
 }
