@@ -1,11 +1,18 @@
 // currentMinute is the current minute, updated every 60 seconds
 var delayMinute;
+var spaceBetweenBlocks;
+var spaceBetweenSections;
+var hourBlockLength;
+var minuteBlockLength;
+var secondBlockLength;
+var borderMargins;
+
 
 // setup() is called once at page-load
 function setup() {
   
     delayMinute = minute();
-    createCanvas(388, 148);
+    createCanvas(392, 150);
     colorMode(RGB, 255, 255, 255);
     setBackground();
 
@@ -18,10 +25,6 @@ function setBackground() {
     background(myColor);
   
     strokeWeight(0.5);
-    line(170, 4, 170, 144);
-    line(314, 4, 314, 144);
-    line(100, 74, 240, 74);
-    line(244, 74, 384, 74);
      
 }
 
@@ -35,23 +38,25 @@ function setSecond(sec) {
   fullSecondSquares = Math.floor(secondCompletion / (squareArea/4))
   
   if (fullSecondSquares == 0) {
-    square(244, 4, secondCompletion ** (0.5));
+    square(246, 4, secondCompletion ** (0.5));
   }
 
   if (fullSecondSquares == 1) {
-    square(244, 4, 70);
-    square(314, 4, (secondCompletion-(squareArea/4)) ** (0.5));
+    square(246, 4, 70);
+    square(318, 4, (secondCompletion-(squareArea/4)) ** (0.5));
   }
 
   if (fullSecondSquares == 2) {
-    rect(244, 4, 140, 70);
-    square(314, 74, (secondCompletion-(squareArea/2)) ** (0.5));
+    square(246, 4, 70);
+    square(318, 4, 70);
+    square(318, 76, (secondCompletion-(squareArea/2)) ** (0.5));
   }
 
   if (fullSecondSquares == 3) {
-    rect(244, 4, 140, 70);
-    square(314, 74, 70);
-    square(244, 74, (secondCompletion-(3*squareArea/4)) ** (0.5));
+    square(246, 4, 70);
+    square(318, 4, 70);
+    square(318, 76, 70);
+    square(246, 76, (secondCompletion-(3*squareArea/4)) ** (0.5));
   }
 
 }
@@ -71,18 +76,20 @@ function setMinute(secs) {
   
     if (fullMinuteSquares == 1) {
       square(100, 4, 70);
-      square(170, 4, (minuteCompletion-(squareArea/4)) ** (0.5));
+      square(172, 4, (minuteCompletion-(squareArea/4)) ** (0.5));
     }
   
     if (fullMinuteSquares == 2) {
-      rect(100, 4, 140, 70);
-      square(170, 74, (minuteCompletion-(squareArea/2)) ** (0.5));
+      square(100, 4, 70);
+      square(172, 4, 70);
+      square(172, 76, (minuteCompletion-(squareArea/2)) ** (0.5));
     }
   
     if (fullMinuteSquares == 3) {
-      rect(100, 4, 140, 70);
-      square(174, 74, 70);
-      square(100, 74, (minuteCompletion-(3*squareArea/4)) ** (0.5));
+      square(100, 4, 70);
+      square(172, 4, 70);
+      square(174, 76, 70);
+      square(100, 76, (minuteCompletion-(3*squareArea/4)) ** (0.5));
     } 
 
 }
@@ -97,10 +104,6 @@ function setHour(min, hour) {
     for (let sq2 = 0; sq2 < 4; sq2++) {
       
       if (hour <= 0) {
-        
-        fill(200, 200, 200);
-        square(4 + sq2 * 24, wdth, 20);
-        fill(0, 0, 0);
         
         newLength = map(min, 0, 60, 0, 20 * 20) ** 0.5;
         square(4 + sq2 * 24, wdth, newLength);
