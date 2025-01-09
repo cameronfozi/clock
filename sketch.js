@@ -4,7 +4,7 @@ var delayMinute;
 // setup() is called once at page-load
 function setup() {
     delayMinute = minute();
-    createCanvas(300,100);
+    createCanvas(396, 148);
     colorMode(RGB, 255, 255, 255);
     setBackground();
 
@@ -16,23 +16,24 @@ function setBackground() {
     let myColor = color(240, 240, 240);
     background(myColor);
   
-    strokeWeight(3);
-    line(200, 0, 200, 100);
-    line(100, 0, 100, 100);
+    strokeWeight(2);
+    line(248, 0, 248, 148);
+    line(100, 0, 100, 148);
   
+    strokeWeight(0.5);
+    line(100, 74, 396, 74);
+    line(322, 0, 322, 148);
+    line(174, 0, 174, 148);
+   
     strokeWeight(1);
-    line(0, 50, 300, 50);
-    line(250, 0, 250, 100);
-    line(150, 0, 150, 100);
-    line(50, 0, 50, 100);
+    fill(255, 255, 255);
+    for (let sq1 = 0; sq1 < 4; sq1++) {
 
-    for (let sq1 = 0; sq1 < 3; sq1++) {
-
-      wdth = 5 + 25 * sq1
+      wdth = 4 + 24 * sq1
       
-      for (let sq2 = 0; sq2 < 8; sq2++) {
+      for (let sq2 = 0; sq2 < 6; sq2++) {
       
-        square(wdth, 5 + sq2 * 25, 20)
+        square(wdth, 4 + sq2 * 24, 20);
 
       }
 
@@ -45,27 +46,27 @@ function setBackground() {
 // setSecond() sets the second hand
 function setSecond(sec) {
 
-  secondCompletion = map(sec, 0, 59, 0, 100 * 100)
-  fullSecondSquares = Math.floor(secondCompletion / ((100 * 100)/4))
+  secondCompletion = map(sec, 0, 59, 0, 148 * 148)
+  fullSecondSquares = Math.floor(secondCompletion / ((148 * 148)/4))
   
   if (fullSecondSquares == 0) {
-    square(200, 0, secondCompletion ** (0.5));
+    square(248, 0, secondCompletion ** (0.5));
   }
 
   if (fullSecondSquares == 1) {
-    square(200, 0, 50);
-    square(250, 0, (secondCompletion-((100 * 100)/4)) ** (0.5));
+    square(248, 0, 74);
+    square(322, 0, (secondCompletion-((148 * 148)/4)) ** (0.5));
   }
 
   if (fullSecondSquares == 2) {
-    rect(200, 0, 100, 50);
-    square(250, 50, (secondCompletion-((100 * 100)/2)) ** (0.5));
+    rect(248, 0, 148, 74);
+    square(322, 74, (secondCompletion-((148 * 148)/2)) ** (0.5));
   }
 
   if (fullSecondSquares == 3) {
-    rect(200, 0, 100, 50);
-    square(250, 50, 50);
-    square(200, 50, (secondCompletion-(3*(100 * 100)/4)) ** (0.5));
+    rect(248, 0, 148, 74);
+    square(322, 74, 74);
+    square(248, 74, (secondCompletion-(3*(148 * 148)/4)) ** (0.5));
   }
 
 }
@@ -73,31 +74,32 @@ function setSecond(sec) {
 // setMinute() sets the minute hand
 function setMinute(secs) {
 
-    minuteCompletion= map(secs, 0, 3599, 0, 100 * 100)
-    fullMinuteSquares = Math.floor(minuteCompletion / ((100 * 100)/4))
+    minuteCompletion= map(secs, 0, 3599, 0, 148 * 148)
+    fullMinuteSquares = Math.floor(minuteCompletion / ((148 * 148)/4))
     
     if (fullMinuteSquares == 0) {
       square(100, 0, minuteCompletion ** (0.5));
     }
   
     if (fullMinuteSquares == 1) {
-      square(100, 0, 50);
-      square(150, 0, (minuteCompletion-((100 * 100)/4)) ** (0.5));
+      square(100, 0, 74);
+      square(174, 0, (minuteCompletion-((148 * 148)/4)) ** (0.5));
     }
   
     if (fullMinuteSquares == 2) {
-      rect(100, 0, 100, 50);
-      square(150, 50, (minuteCompletion-((100 * 100)/2)) ** (0.5));
+      rect(100, 0, 148, 74);
+      square(174, 74, (minuteCompletion-((148 * 148)/2)) ** (0.5));
     }
   
     if (fullMinuteSquares == 3) {
-      rect(100, 0, 100, 50);
-      square(150, 50, 50);
-      square(100, 50, (minuteCompletion-(3*(100 * 100)/4)) ** (0.5));
+      rect(100, 0, 148, 74);
+      square(174, 74, 74);
+      square(100, 74, (minuteCompletion-(3*(148 * 148)/4)) ** (0.5));
     } 
 
 }
 
+// setHour() sets the hour hand
 function setHour(mins) {
 
   hourCompletion= map(mins, 0, 1439, 0, 100 * 100)
