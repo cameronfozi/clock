@@ -15,15 +15,15 @@ function setup() {
     createCanvas(392, 150);
     colorMode(RGB, 255, 255, 255);
     setBackground();
+    fill(100,74,76);
 
 }
 
 // setBackground() sets the clock's background
 function setBackground() {
 
-    let myColor = color(200, 200, 200);
+    let myColor = color(249,241,241);
     background(myColor);
-  
     strokeWeight(0.5);
      
 }
@@ -148,7 +148,7 @@ function draw() {
     let sec = second();
     checkPrint(min);
   
-    fill(0, 0, 0);
+    fill(66,74,76);
     setSecond(sec);
     setMinute(sec + min * 60);
     setHour(min, hr);
