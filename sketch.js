@@ -56,9 +56,10 @@ function setSecond(sec) {
 
 }
 
+// setMinute() sets the minute hand
 function setMinute(secs) {
 
-  minuteCompletion= map(secs, 0, 3599, 0, 100 * 100)
+    minuteCompletion= map(secs, 0, 3599, 0, 100 * 100)
     fullMinuteSquares = Math.floor(minuteCompletion / ((100 * 100)/4))
     
     if (fullMinuteSquares == 0) {
@@ -79,15 +80,34 @@ function setMinute(secs) {
       rect(100, 0, 100, 50);
       square(150, 50, 50);
       square(100, 50, (minuteCompletion-(3*(100 * 100)/4)) ** (0.5));
-    }  
+    } 
+
+}
+
+function setHour(mins) {
+
+  hourCompletion= map(mins, 0, 1439, 0, 100 * 100)
+  fullHourSquares = Math.floor(hourCompletion / ((100 * 100)/4))
   
-    if (min != delayMinute) {
+  if (fullHourSquares == 0) {
+    square(0, 0, hourCompletion ** (0.5));
+  }
 
-        console.log(min);
-        setBackground();
-        delayMinute = min;
+  if (fullHourSquares == 1) {
+    square(0, 0, 50);
+    square(50, 0, (hourCompletion-((100 * 100)/4)) ** (0.5));
+  }
 
-    }
+  if (fullHourSquares == 2) {
+    rect(0, 0, 100, 50);
+    square(50, 50, (hourCompletion-((100 * 100)/2)) ** (0.5));
+  }
+
+  if (fullHourSquares == 3) {
+    rect(0, 0, 100, 50);
+    square(50, 50, 50);
+    square(0, 50, (hourCompletion-(3*(100 * 100)/4)) ** (0.5));
+  } 
 
 }
 
@@ -101,5 +121,14 @@ function draw() {
     fill(0, 0, 0);
     setSecond(sec);
     setMinute(sec + min * 60);
+    setHour(min + hr * 60);
+
+    if (min != delayMinute) {
+
+      console.log(min);
+      setBackground();
+      delayMinute = min;
+
+  }
   
 }
