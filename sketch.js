@@ -28,6 +28,34 @@ function setBackground() {
 
 }
 
+// setSecond() sets the second hand
+function setSecond(sec) {
+
+  secondCompletion = map(sec, 0, 59, 0, 100 * 100)
+  fullSecondSquares = Math.floor(secondCompletion / ((100 * 100)/4))
+  
+  if (fullSecondSquares == 0) {
+    square(200, 0, secondCompletion ** (0.5));
+  }
+
+  if (fullSecondSquares == 1) {
+    square(200, 0, 50);
+    square(250, 0, (secondCompletion-((100 * 100)/4)) ** (0.5));
+  }
+
+  if (fullSecondSquares == 2) {
+    rect(200, 0, 100, 50);
+    square(250, 50, (secondCompletion-((100 * 100)/2)) ** (0.5));
+  }
+
+  if (fullSecondSquares == 3) {
+    rect(200, 0, 100, 50);
+    square(250, 50, 50);
+    square(200, 50, (secondCompletion-(3*(100 * 100)/4)) ** (0.5));
+  }
+
+}
+
 // draw() is called 60 times per second
 function draw() {
   
@@ -36,28 +64,7 @@ function draw() {
     let sec = second();
   
     fill(0, 0, 0);
-    secondCompletion = map(sec, 0, 59, 0, 100 * 100)
-    fullSecondSquares = Math.floor(secondCompletion / ((100 * 100)/4))
-    
-    if (fullSecondSquares == 0) {
-      square(200, 0, secondCompletion ** (0.5));
-    }
-  
-    if (fullSecondSquares == 1) {
-      square(200, 0, 50);
-      square(250, 0, (secondCompletion-((100 * 100)/4)) ** (0.5));
-    }
-  
-    if (fullSecondSquares == 2) {
-      rect(200, 0, 100, 50);
-      square(250, 50, (secondCompletion-((100 * 100)/2)) ** (0.5));
-    }
-  
-    if (fullSecondSquares == 3) {
-      rect(200, 0, 100, 50);
-      square(250, 50, 50);
-      square(200, 50, (secondCompletion-(3*(100 * 100)/4)) ** (0.5));
-    }
+    setSecond(sec);
   
     minuteCompletion= map(sec + min * 60, 0, 3599, 0, 100 * 100)
     fullMinuteSquares = Math.floor(minuteCompletion / ((100 * 100)/4))
