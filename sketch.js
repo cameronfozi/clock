@@ -2,18 +2,36 @@
 var delayMinute;
 var spaceBetweenBlocks;
 var pageMargin;
+var hourBlockLength;
+var minuteBlockLength;
+var secondBlockLength;
+var minuteIndent;
+var minuteIncr;
+var secondIndent;
+var secondIncr;
 
 
 // setup() is called once at page-load
 function setup() {
   
     delayMinute = minute();
-    spaceBetweenBlocks = 2;
+    spaceBetweenBlocks = 3;
     pageMargin = 4;
+    hourBlockLength = 30;
   
-    wdth = pageMargin * 2 + 22 * 4 + spaceBetweenBlocks * 6 + 34 + 140
+    hght = pageMargin * 2 + spaceBetweenBlocks * 5 + hourBlockLength * 6  
+    
+    minuteBlockLength = (hght - pageMargin * 2 - spaceBetweenBlocks * 3) / 4;
+    secondBlockLength = (hght - pageMargin * 2 - spaceBetweenBlocks) / 2;
+  
+    minuteIndent = pageMargin + 2 * spaceBetweenBlocks + 2 * hourBlockLength
+    minuteIncr = spaceBetweenBlocks + minuteBlockLength;
+    secondIndent = minuteIndent + minuteBlockLength + spaceBetweenBlocks;
+    secondIncr = secondBlockLength + spaceBetweenBlocks;
+
+    wdth = secondIncr + secondIndent + secondBlockLength + pageMargin
                     
-    createCanvas(wdth, 150);
+    createCanvas(wdth, hght);
     colorMode(RGB, 255, 255, 255);
     setBackground();
     fill('rgba(100, 100, 100, 1)'); 
@@ -29,32 +47,36 @@ function setBackground() {
     fill(255, 255, 255); 
     strokeWeight(0.25);
   
-    square(136, 4, 70);
-    square(208, 4, 70);
-    square(208, 76, 70);
-    square(136, 76, 70);
-  
-    square(100, 4, 34);
-    square(100, 40, 34);
-    square(100, 76, 34);
-    square(100, 112, 34);
+    incr = hourBlockLength + spaceBetweenBlocks;
   
     for (let sq1 = 0; sq1 < 6; sq1++) {
 
-      wdth = 4 + (22 + spaceBetweenBlocks) * sq1
+    wdth = pageMargin + (incr) * sq1
       
-      for (let sq2 = 0; sq2 < 4; sq2++) {
+    for (let sq2 = 0; sq2 < 2; sq2++) {
       
-        fill(255, 255, 255);
-        strokeWeight(0.25);
-        square(4 + (22 + spaceBetweenBlocks) * sq2, wdth, 22);
-        strokeWeight(0);
-        fill('rgba(100, 100, 100, 1)');
+      fill(255, 255, 255);
+      strokeWeight(0.25);
+      square(pageMargin + incr * sq2, wdth, hourBlockLength);
 
     }
 
-  } 
+  }
   
+  for (let sq = 0; sq < 4; sq++) {
+    
+    sq % 2
+    Math.floor(sq / 2)
+    
+    square(minuteIndent, 
+           pageMargin + minuteIncr * sq, 
+           minuteBlockLength);
+    
+    square(secondIndent + secondIncr * (sq % 2), 
+           pageMargin + secondIncr * Math.floor(sq / 2), 
+           secondBlockLength);
+    
+  }  
   
     strokeWeight(0);
     fill('rgba(100, 100, 100, 1)'); 
@@ -64,40 +86,51 @@ function setBackground() {
 // setSecond() sets the second hand
 function setSecond(sec) {
 
-  squareLength = 140
+  squareLength = secondBlockLength * 2
   squareArea = squareLength ** 2
   
   secondCompletion = map(sec, 0, 59, 0, squareArea)
   fullSecondSquares = Math.floor(secondCompletion / (squareArea/4))
-  
+    
   if (fullSecondSquares == 0) {
     rectMode(CORNERS);
     sideLength = secondCompletion ** 0.5;
-    rect(206, 74, 206-sideLength, 74-sideLength);
+    rect(secondIndent + secondBlockLength, 
+         secondBlockLength + pageMargin, 
+         secondIndent + secondBlockLength - sideLength, 
+         secondBlockLength + pageMargin - sideLength);
     rectMode(CORNER);
   }
 
   if (fullSecondSquares == 1) {
-    square(136, 4, 70);
+    square(secondIndent, pageMargin, secondBlockLength);
     rectMode(CORNERS);
     sideLength = (secondCompletion-(squareArea/4)) ** 0.5;
-    rect(208, 74, 208+sideLength, 74-sideLength);
+    rect(secondIndent + secondIncr, 
+         secondBlockLength + pageMargin, 
+         secondIndent + secondIncr + sideLength, 
+         secondBlockLength + pageMargin - sideLength);
     rectMode(CORNER);
   }
 
   if (fullSecondSquares == 2) {
-    square(136, 4, 70);
-    square(208, 4, 70);
-    square(208, 76, (secondCompletion-(squareArea/2)) ** (0.5));
+    square(secondIndent, pageMargin, secondBlockLength);
+    square(secondIndent + secondIncr, pageMargin, secondBlockLength);
+    square(secondIndent + secondIncr, 
+           pageMargin + secondIncr, 
+           (secondCompletion - (squareArea/2)) ** 0.5);
   }
 
   if (fullSecondSquares == 3) {
-    square(136, 4, 70);
-    square(208, 4, 70);
-    square(208, 76, 70);
+    square(secondIndent, pageMargin, secondBlockLength);
+    square(secondIndent + secondIncr, pageMargin, secondBlockLength);
+    square(secondIndent + secondIncr, pageMargin + secondIncr, secondBlockLength);
     rectMode(CORNERS);
     sideLength = (secondCompletion-(3*squareArea/4)) ** 0.5;
-    rect(206, 76, 206-sideLength, 76+sideLength);
+    rect(secondIndent + secondBlockLength, 
+         secondIncr + pageMargin, 
+         secondIndent + secondBlockLength - sideLength, 
+         secondIncr + pageMargin + sideLength);
     rectMode(CORNER);
   }
 
@@ -106,52 +139,49 @@ function setSecond(sec) {
 // setMinute() sets the minute hand
 function setMinute(secs) {
   
-    squareLength = 136
-
+    squareLength = 4 * minuteBlockLength;
+    
     minuteCompletion= map(secs, 0, 3599, 0, squareLength)
     fullMinuteSquares = Math.floor(minuteCompletion / 34)
-    
-    if (fullMinuteSquares == 0) {
-      rect(100, 4, 34, minuteCompletion);
-    }
   
-    if (fullMinuteSquares == 1) {
-      square(100, 4, 34);
-      rect(100, 40, 34, minuteCompletion - 34);
-    }
+    rect(minuteIndent, 
+         pageMargin + minuteIncr * fullMinuteSquares, 
+         minuteBlockLength, 
+         minuteCompletion - minuteBlockLength * fullMinuteSquares);
   
-    if (fullMinuteSquares == 2) {
-      square(100, 4, 34);
-      square(100, 40, 34);
-      rect(100, 76, 34, minuteCompletion - 68);
+    while (fullMinuteSquares > 0) {
+      
+      fullMinuteSquares = fullMinuteSquares - 1
+      square(minuteIndent, 
+             pageMargin + fullMinuteSquares * minuteIncr, 
+             minuteBlockLength);
+
     }
-  
-    if (fullMinuteSquares == 3) {
-      square(100, 4, 34);
-      square(100, 40, 34);
-      square(100, 76, 34);
-      rect(100, 112, 34, minuteCompletion - 102);
-    } 
 
 }
 
 // setHour() sets the hour hand
 function setHour(min, hour) {
+  
+  if (hour >= 12) {hour = hour-12}
+  
+  hourArea = hourBlockLength ** 2
+  incr = hourBlockLength + spaceBetweenBlocks;
 
   for (let sq1 = 0; sq1 < 6; sq1++) {
 
-    wdth = 4 + (22 + spaceBetweenBlocks) * sq1
+    wdth = pageMargin + (incr) * sq1
       
-    for (let sq2 = 0; sq2 < 4; sq2++) {
+    for (let sq2 = 0; sq2 < 2; sq2++) {
             
       if (hour == 0) {
         
-        newLength = map(min, 0, 60, 0, 22 * 22) ** 0.5;
-        square(4 + (22 + spaceBetweenBlocks) * sq2, wdth, newLength);
+        newLength = map(min, 0, 60, 0, hourArea) ** 0.5;
+        square(pageMargin + (incr) * sq2, wdth, newLength);
         
       } if (hour > 0) {
         
-        square(4 + (22 + spaceBetweenBlocks) * sq2, wdth, 22);
+        square(pageMargin + (incr) * sq2, wdth, hourBlockLength);
         
       }
       
