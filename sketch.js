@@ -6,12 +6,13 @@ function setup() {
     delayMinute = minute();
     createCanvas(300,100);
     colorMode(RGB, 255, 255, 255);
-  
+    setBackground();
+
 }
 
-// draw() is called 60 times per second
-function draw() {
-  
+// setBackground() sets the clock's background
+function setBackground() {
+
     let myColor = color(240, 240, 240);
     background(myColor);
   
@@ -24,6 +25,11 @@ function draw() {
     line(250, 0, 250, 100);
     line(150, 0, 150, 100);
     line(50, 0, 50, 100);
+
+}
+
+// draw() is called 60 times per second
+function draw() {
   
     let hr = hour();
     let min = minute();
@@ -80,7 +86,8 @@ function draw() {
     if (min != delayMinute) {
 
         console.log(min);
-        delayMinute = min
+        setBackground();
+        delayMinute = min;
 
     }
 }
