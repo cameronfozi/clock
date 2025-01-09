@@ -56,17 +56,9 @@ function setSecond(sec) {
 
 }
 
-// draw() is called 60 times per second
-function draw() {
-  
-    let hr = hour();
-    let min = minute();
-    let sec = second();
-  
-    fill(0, 0, 0);
-    setSecond(sec);
-  
-    minuteCompletion= map(sec + min * 60, 0, 3599, 0, 100 * 100)
+function setMinute(secs) {
+
+  minuteCompletion= map(secs, 0, 3599, 0, 100 * 100)
     fullMinuteSquares = Math.floor(minuteCompletion / ((100 * 100)/4))
     
     if (fullMinuteSquares == 0) {
@@ -89,7 +81,6 @@ function draw() {
       square(100, 50, (minuteCompletion-(3*(100 * 100)/4)) ** (0.5));
     }  
   
-
     if (min != delayMinute) {
 
         console.log(min);
@@ -97,4 +88,18 @@ function draw() {
         delayMinute = min;
 
     }
+
+}
+
+// draw() is called 60 times per second
+function draw() {
+  
+    let hr = hour();
+    let min = minute();
+    let sec = second();
+  
+    fill(0, 0, 0);
+    setSecond(sec);
+    setMinute(sec + min * 60);
+  
 }
