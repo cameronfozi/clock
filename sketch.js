@@ -1,8 +1,9 @@
 // currentMinute is the current minute, updated every 60 seconds
-var delayMinute = minute();
+var delayMinute;
 
 // setup() is called once at page-load
 function setup() {
+    delayMinute = minute();
     createCanvas(300,100);
     colorMode(RGB, 255, 255, 255);
   
