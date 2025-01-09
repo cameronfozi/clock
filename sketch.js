@@ -26,21 +26,7 @@ function setBackground() {
     line(174, 0, 174, 148);
    
     strokeWeight(1);
-    fill(240, 240, 240);
-    for (let sq1 = 0; sq1 < 4; sq1++) {
-
-      wdth = 4 + 24 * sq1
-      
-      for (let sq2 = 0; sq2 < 6; sq2++) {
-      
-        square(wdth, 4 + sq2 * 24, 20);
-
-      }
-
-    }
-
-    fill(0, 0, 0);
-
+  
 }
 
 // setSecond() sets the second hand
@@ -109,7 +95,11 @@ function setHour(min, hour) {
     for (let sq2 = 0; sq2 < 4; sq2++) {
       
       if (hour <= 0) {
-      
+        
+        fill(240, 240, 240);
+        square(4 + sq2 * 24, wdth, 20);
+        fill(0, 0, 0);
+        
         newLength = map(min, 0, 60, 0, 20 * 20) ** 0.5;
         square(4 + sq2 * 24, wdth, newLength);
         break
