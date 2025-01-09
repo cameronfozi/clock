@@ -26,11 +26,11 @@ function setBackground() {
     line(150, 0, 150, 100);
     line(50, 0, 50, 100);
 
-    for (let sq1 = 0; sq < 3; i++) {
+    for (let sq1 = 0; sq1 < 3; sq1++) {
 
       wdth = 5 + 25 * sq1
       
-      for (let sq2 = 0; sq < 8; i++) {
+      for (let sq2 = 0; sq2 < 8; sq2++) {
       
         square(wdth, 5 + sq2 * 25, 20)
 
