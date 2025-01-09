@@ -12,7 +12,18 @@ var borderMargins;
 function setup() {
   
     delayMinute = minute();
-    createCanvas(398, 150);
+    spaceBetweenBlocks = 2;
+    blockLength = 70;
+    borderMargins = 4;
+    spaceBetweenSections = 10;
+  
+    hght = 2 * borderMargins + 2 * blockLength + spaceBetweenBlocks
+  
+    hourBlockLength = (hght - 2 * borderMargins - 5 * spaceBetweenBlocks) / 6
+  
+    wdth = 2 * borderMargins + 2 * spaceBetweenSections + 5 * spaceBetweenBlocks + 4 * blockLength + 4 * hourBlockLength // fix this
+      
+    createCanvas(wdth, hght);
     colorMode(RGB, 255, 255, 255);
     setBackground();
     fill(100,74,76);
@@ -99,19 +110,19 @@ function setHour(min, hour) {
 
   for (let sq1 = 0; sq1 < 6; sq1++) {
 
-    wdth = 4 + 22 * sq1
+    wdth = 4 + (20 + spaceBetweenBlocks) * sq1
       
     for (let sq2 = 0; sq2 < 4; sq2++) {
       
       if (hour <= 0) {
         
         newLength = map(min, 0, 60, 0, 20 * 20) ** 0.5;
-        square(4 + sq2 * 22, wdth, newLength);
+        square(4 + (20 + spaceBetweenBlocks) * sq2, wdth, newLength);
         break
         
       } else {
         
-        square(4 + sq2 * 22, wdth, 20);
+        square(4 + (20 + spaceBetweenBlocks) * sq2, wdth, 20);
         hour = hour - 1;
         
       }
