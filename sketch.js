@@ -32,6 +32,24 @@ function setBackground() {
     square(172, 4, 70);
     square(172, 76, 70);
     square(100, 76, 70);
+  
+    for (let sq1 = 0; sq1 < 6; sq1++) {
+
+      wdth = 4 + (22 + spaceBetweenBlocks) * sq1
+      
+      for (let sq2 = 0; sq2 < 4; sq2++) {
+      
+        fill(255, 255, 255);
+        strokeWeight(0.25);
+        square(4 + (22 + spaceBetweenBlocks) * sq2, wdth, 22);
+        strokeWeight(0);
+        fill('rgba(100, 100, 100, 1)');
+
+    }
+
+  } 
+  
+  
     strokeWeight(0);
     fill('rgba(100, 100, 100, 1)'); 
      
@@ -120,13 +138,7 @@ function setHour(min, hour) {
     wdth = 4 + (22 + spaceBetweenBlocks) * sq1
       
     for (let sq2 = 0; sq2 < 4; sq2++) {
-      
-      fill(255, 255, 255);
-      strokeWeight(0.25);
-      square(4 + (22 + spaceBetweenBlocks) * sq2, wdth, 22);
-      strokeWeight(0);
-      fill('rgba(100, 100, 100, 1)');
-      
+            
       if (hour == 0) {
         
         newLength = map(min, 0, 60, 0, 22 * 22) ** 0.5;
