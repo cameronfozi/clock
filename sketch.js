@@ -12,7 +12,7 @@ var borderMargins;
 function setup() {
   
     delayMinute = minute();
-    createCanvas(392, 150);
+    createCanvas(398, 150);
     colorMode(RGB, 255, 255, 255);
     setBackground();
     fill(100,74,76);
@@ -38,25 +38,25 @@ function setSecond(sec) {
   fullSecondSquares = Math.floor(secondCompletion / (squareArea/4))
   
   if (fullSecondSquares == 0) {
-    square(246, 4, secondCompletion ** (0.5));
+    square(252, 4, secondCompletion ** (0.5));
   }
 
   if (fullSecondSquares == 1) {
-    square(246, 4, 70);
-    square(318, 4, (secondCompletion-(squareArea/4)) ** (0.5));
+    square(252, 4, 70);
+    square(324, 4, (secondCompletion-(squareArea/4)) ** (0.5));
   }
 
   if (fullSecondSquares == 2) {
-    square(246, 4, 70);
-    square(318, 4, 70);
-    square(318, 76, (secondCompletion-(squareArea/2)) ** (0.5));
+    square(252, 4, 70);
+    square(324, 4, 70);
+    square(324, 76, (secondCompletion-(squareArea/2)) ** (0.5));
   }
 
   if (fullSecondSquares == 3) {
-    square(246, 4, 70);
-    square(318, 4, 70);
-    square(318, 76, 70);
-    square(246, 76, (secondCompletion-(3*squareArea/4)) ** (0.5));
+    square(252, 4, 70);
+    square(324, 4, 70);
+    square(324, 76, 70);
+    square(252, 76, (secondCompletion-(3*squareArea/4)) ** (0.5));
   }
 
 }
@@ -99,19 +99,19 @@ function setHour(min, hour) {
 
   for (let sq1 = 0; sq1 < 6; sq1++) {
 
-    wdth = 4 + 24 * sq1
+    wdth = 4 + 22 * sq1
       
     for (let sq2 = 0; sq2 < 4; sq2++) {
       
       if (hour <= 0) {
         
         newLength = map(min, 0, 60, 0, 20 * 20) ** 0.5;
-        square(4 + sq2 * 24, wdth, newLength);
+        square(4 + sq2 * 22, wdth, newLength);
         break
         
       } else {
         
-        square(4 + sq2 * 24, wdth, 20);
+        square(4 + sq2 * 22, wdth, 20);
         hour = hour - 1;
         
       }
