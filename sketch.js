@@ -125,6 +125,7 @@ function draw() {
 
     if (min != delayMinute) {
 
+      square(100, 50, 50);
       console.log(min);
       setBackground();
       delayMinute = min;
