@@ -142,7 +142,7 @@ function setMinute(secs) {
     squareLength = 4 * minuteBlockLength;
     
     minuteCompletion= map(secs, 0, 3599, 0, squareLength)
-    fullMinuteSquares = Math.floor(minuteCompletion / 34)
+    fullMinuteSquares = Math.floor(minuteCompletion / minuteBlockLength)
   
     rect(minuteIndent, 
          pageMargin + minuteIncr * fullMinuteSquares, 
