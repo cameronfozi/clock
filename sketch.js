@@ -26,7 +26,6 @@ function setBackground() {
     line(150, 0, 150, 100);
     line(50, 0, 50, 100);
 
-    fill(255, 255, 255);
     for (let sq1 = 0; sq < 3; i++) {
 
       wdth = 5 + 25 * sq1
