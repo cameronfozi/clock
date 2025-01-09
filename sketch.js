@@ -1,11 +1,6 @@
 // currentMinute is the current minute, updated every 60 seconds
 var delayMinute;
 var spaceBetweenBlocks;
-var spaceBetweenSections;
-var hourBlockLength;
-var minuteBlockLength;
-var secondBlockLength;
-var borderMargins;
 
 
 // setup() is called once at page-load
@@ -13,29 +8,32 @@ function setup() {
   
     delayMinute = minute();
     spaceBetweenBlocks = 2;
-    blockLength = 70;
-    borderMargins = 4;
-    spaceBetweenSections = 10;
-  
-    hght = 2 * borderMargins + 2 * blockLength + spaceBetweenBlocks
-  
-    hourBlockLength = (hght - 2 * borderMargins - 5 * spaceBetweenBlocks) / 6
-  
-    wdth = 2 * borderMargins + 2 * spaceBetweenSections + 5 * spaceBetweenBlocks + 4 * blockLength + 4 * hourBlockLength // fix this
-      
-    createCanvas(wdth, hght);
+              
+    createCanvas(390, 150);
     colorMode(RGB, 255, 255, 255);
     setBackground();
-    fill(100,74,76);
+    fill('rgba(100, 100, 100, 1)'); 
 
 }
 
 // setBackground() sets the clock's background
 function setBackground() {
 
-    let myColor = color(249,241,241);
+    let myColor = color(250, 240, 245);
     background(myColor);
-    strokeWeight(0.5);
+  
+    fill(255, 255, 255); 
+    strokeWeight(0.25);
+    square(244, 4, 70);
+    square(316, 4, 70);
+    square(316, 76, 70);
+    square(244, 76, 70);
+    square(100, 4, 70);
+    square(172, 4, 70);
+    square(172, 76, 70);
+    square(100, 76, 70);
+    strokeWeight(0);
+    fill('rgba(100, 100, 100, 1)'); 
      
 }
 
@@ -49,25 +47,34 @@ function setSecond(sec) {
   fullSecondSquares = Math.floor(secondCompletion / (squareArea/4))
   
   if (fullSecondSquares == 0) {
-    square(252, 4, secondCompletion ** (0.5));
+    rectMode(CORNERS);
+    sideLength = secondCompletion ** 0.5;
+    rect(314, 74, 314-sideLength, 74-sideLength);
+    rectMode(CORNER);
   }
 
   if (fullSecondSquares == 1) {
-    square(252, 4, 70);
-    square(324, 4, (secondCompletion-(squareArea/4)) ** (0.5));
+    square(244, 4, 70);
+    rectMode(CORNERS);
+    sideLength = (secondCompletion-(squareArea/4)) ** 0.5;
+    rect(316, 74, 316+sideLength, 74-sideLength);
+    rectMode(CORNER);
   }
 
   if (fullSecondSquares == 2) {
-    square(252, 4, 70);
-    square(324, 4, 70);
-    square(324, 76, (secondCompletion-(squareArea/2)) ** (0.5));
+    square(244, 4, 70);
+    square(316, 4, 70);
+    square(316, 76, (secondCompletion-(squareArea/2)) ** (0.5));
   }
 
   if (fullSecondSquares == 3) {
-    square(252, 4, 70);
-    square(324, 4, 70);
-    square(324, 76, 70);
-    square(252, 76, (secondCompletion-(3*squareArea/4)) ** (0.5));
+    square(244, 4, 70);
+    square(316, 4, 70);
+    square(316, 76, 70);
+    rectMode(CORNERS);
+    sideLength = (secondCompletion-(3*squareArea/4)) ** 0.5;
+    rect(314, 76, 314-sideLength, 76+sideLength);
+    rectMode(CORNER);
   }
 
 }
@@ -110,29 +117,29 @@ function setHour(min, hour) {
 
   for (let sq1 = 0; sq1 < 6; sq1++) {
 
-    wdth = 4 + (20 + spaceBetweenBlocks) * sq1
+    wdth = 4 + (22 + spaceBetweenBlocks) * sq1
       
     for (let sq2 = 0; sq2 < 4; sq2++) {
       
-      if (hour <= 0) {
+      fill(255, 255, 255);
+      strokeWeight(0.25);
+      square(4 + (22 + spaceBetweenBlocks) * sq2, wdth, 22);
+      strokeWeight(0);
+      fill('rgba(100, 100, 100, 1)');
+      
+      if (hour == 0) {
         
-        newLength = map(min, 0, 60, 0, 20 * 20) ** 0.5;
-        square(4 + (20 + spaceBetweenBlocks) * sq2, wdth, newLength);
-        break
+        newLength = map(min, 0, 60, 0, 22 * 22) ** 0.5;
+        square(4 + (22 + spaceBetweenBlocks) * sq2, wdth, newLength);
         
-      } else {
+      } if (hour > 0) {
         
-        square(4 + (20 + spaceBetweenBlocks) * sq2, wdth, 20);
-        hour = hour - 1;
+        square(4 + (22 + spaceBetweenBlocks) * sq2, wdth, 22);
         
       }
+      
+      hour = hour - 1;
 
-    }
-      
-    if (hour <= 0) {
-      
-      break
-      
     }
 
   } 
@@ -159,7 +166,7 @@ function draw() {
     let sec = second();
     checkPrint(min);
   
-    fill(66,74,76);
+    fill('rgba(100, 100, 100, 1)');
     setSecond(sec);
     setMinute(sec + min * 60);
     setHour(min, hr);
