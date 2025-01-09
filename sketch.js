@@ -88,7 +88,7 @@ function setMinute(secs) {
     if (fullMinuteSquares == 3) {
       square(100, 4, 70);
       square(172, 4, 70);
-      square(174, 76, 70);
+      square(172, 76, 70);
       square(100, 76, (minuteCompletion-(3*squareArea/4)) ** (0.5));
     } 
 
