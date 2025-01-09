@@ -26,6 +26,21 @@ function setBackground() {
     line(150, 0, 150, 100);
     line(50, 0, 50, 100);
 
+    fill(255, 255, 255);
+    for (let sq1 = 0; sq < 3; i++) {
+
+      wdth = 5 + 25 * sq1
+      
+      for (let sq2 = 0; sq < 8; i++) {
+      
+        square(wdth, 5 + sq2 * 25, 20)
+
+      }
+
+    }
+
+    fill(0, 0, 0);
+
 }
 
 // setSecond() sets the second hand
@@ -89,25 +104,37 @@ function setHour(mins) {
   hourCompletion= map(mins, 0, 1439, 0, 100 * 100)
   fullHourSquares = Math.floor(hourCompletion / ((100 * 100)/4))
   
-  if (fullHourSquares == 0) {
-    square(0, 0, hourCompletion ** (0.5));
-  }
+  // if (fullHourSquares == 0) {
+  //   square(0, 0, hourCompletion ** (0.5));
+  // }
 
-  if (fullHourSquares == 1) {
-    square(0, 0, 50);
-    square(50, 0, (hourCompletion-((100 * 100)/4)) ** (0.5));
-  }
+  // if (fullHourSquares == 1) {
+  //   square(0, 0, 50);
+  //   square(50, 0, (hourCompletion-((100 * 100)/4)) ** (0.5));
+  // }
 
-  if (fullHourSquares == 2) {
-    rect(0, 0, 100, 50);
-    square(50, 50, (hourCompletion-((100 * 100)/2)) ** (0.5));
-  }
+  // if (fullHourSquares == 2) {
+  //   rect(0, 0, 100, 50);
+  //   square(50, 50, (hourCompletion-((100 * 100)/2)) ** (0.5));
+  // }
 
-  if (fullHourSquares == 3) {
-    rect(0, 0, 100, 50);
-    square(50, 50, 50);
-    square(0, 50, (hourCompletion-(3*(100 * 100)/4)) ** (0.5));
-  } 
+  // if (fullHourSquares == 3) {
+  //   rect(0, 0, 100, 50);
+  //   square(50, 50, 50);
+  //   square(0, 50, (hourCompletion-(3*(100 * 100)/4)) ** (0.5));
+  // } 
+
+}
+
+function checkPrint(min) {
+  
+  if (min != delayMinute) {
+
+    console.log(min);
+    setBackground();
+    delayMinute = min;
+
+  }
 
 }
 
@@ -122,14 +149,6 @@ function draw() {
     setSecond(sec);
     setMinute(sec + min * 60);
     setHour(min + hr * 60);
-
-    if (min != delayMinute) {
-
-      square(100, 50, 50);
-      console.log(min);
-      setBackground();
-      delayMinute = min;
-
-  }
+    checkPrint(min);
   
 }
